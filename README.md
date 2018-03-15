@@ -1,11 +1,18 @@
 # Stellar Horizon Docker image
 
-[![Docker Build Status](https://img.shields.io/docker/build/satoshipay/stellar-horizon.svg)](https://hub.docker.com/r/satoshipay/stellar-horizon/)
-
 ## Docker Hub
 
-The Docker images are automatically built and published at [satoshipay/stellar-horizon](https://hub.docker.com/r/satoshipay/stellar-horizon/).
+The Docker images are automatically built and published at [starformlabs/stellar-horizon](https://hub.docker.com/r/starformlabs/stellar-horizon/).
 
+## Credit
+
+This repo was originally forked from [satoshipay/docker-stellar-horizon](https://github.com/satoshipay/docker-stellar-horizon). 
+The following are the primary changes.
+
+ - Use debian:stretch-slim for the base image
+ - Install from binaries instead of source
+ - Add a check to makes sure that postgres is up before starting
+ 
 ## Configuration
 
 All environment variables that Stellar Horizon accepts are supported. You can find out all available options by running `docker run --rm -it satoshipay/stellar-horizon horizon --help`. CLI options are exposed as upper/snake-case environment variables, e.g., `--stellar-core-url` can be set with the `STELLAR_CORE_URL` environment variable.
