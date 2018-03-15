@@ -20,11 +20,11 @@ done
 
 
 # Check if DB needs to be initialized
-DB_INITIALIZED_MARKER="/data/horizon/.db-initialized"
+DB_INITIALIZED_MARKER="${DATA_DIR}/horizon/.db-initialized"
 if [ ! -f ${DB_INITIALIZED_MARKER} ]; then
     echo "initializing horizon db..."
     horizon db init
-    mkdir -p /data/horizon
+    mkdir -p ${DATA_DIR}/horizon
     touch ${DB_INITIALIZED_MARKER}
 fi
 
