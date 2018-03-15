@@ -1,19 +1,23 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 
-# git tag from https://github.com/stellar/horizon
-ARG STELLAR_HORIZON_VERSION="v0.11.1"
-ARG STELLAR_HORIZON_BUILD_DEPS="git build-essential golang-go"
+ARG HORIZON_VERSION="0.12.2"
 
-LABEL maintainer="hello@satoshipay.io"
+# Install utils. Create man folders to workaround this issue with debian stretch-slim https://github.com/debuerreotype/debuerreotype/issues/10
+RUN apt-get update && mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
+    && apt-get install -y curl postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-# install stellar horizon
-ADD install.sh /
-RUN /install.sh
+# Install horizon
+RUN curl -sL -o horizon.tar.gz https://github.com/stellar/go/releases/download/horizon-v${HORIZON_VERSION}/horizon-v${HORIZON_VERSION}-linux-amd64.tar.gz \
+    && tar -zxvf horizon.tar.gz \
+    && mv /horizon-v${HORIZON_VERSION}-linux-amd64/horizon /usr/local/bin \
+    && chmod +x /usr/local/bin/horizon \
+    && rm -rf horizon.tar.gz /horizon-v${HORIZON_VERSION}-linux-amd64
 
 # HTTP port
 EXPOSE 8000
 
 ADD entry.sh /
-ENTRYPOINT ["/entry.sh"]
 
+ENTRYPOINT ["/entry.sh"]
 CMD ["horizon"]
