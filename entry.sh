@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -ue
 
+# Set defaults for optional params
 : ${DATA_DIR:=/data}
 : ${DB_PORT:=5432}
 
