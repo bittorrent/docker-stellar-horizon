@@ -2,9 +2,9 @@ FROM debian:stretch-slim
 
 ARG HORIZON_VERSION="0.12.2"
 
-# Install utils. Create man folders to workaround this issue with debian stretch-slim https://github.com/debuerreotype/debuerreotype/issues/10
+# Install runtime dependencies and utils. Create man folders to workaround this issue with debian stretch-slim https://github.com/debuerreotype/debuerreotype/issues/10
 RUN apt-get update && mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
-    && apt-get install -y curl postgresql-client \
+    && apt-get install -y --no-install-recommends curl ca-certificates postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Install horizon
