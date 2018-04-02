@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
 
-ARG HORIZON_VERSION="0.12.2"
+ARG HORIZON_VERSION="0.12.3"
 
 # Install runtime dependencies and utils. Create man folders to workaround this issue with debian stretch-slim https://github.com/debuerreotype/debuerreotype/issues/10
 RUN apt-get update && mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
